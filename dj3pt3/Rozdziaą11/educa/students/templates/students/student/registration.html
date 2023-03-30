@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Rejestracja
+{% endblock %}
+
+{% block content %}
+  <h1>
+    Rejestracja
+  </h1>
+  <div class="module">
+    <p>Aby utworzyć konto, wprowadź dane:</p>
+    <form method="post">
+      {{ form.as_p }}
+      {% csrf_token %}
+      <p><input type="submit" value="Utwórz konto"></p>
+    </form>
+  </div>
+{% endblock %}

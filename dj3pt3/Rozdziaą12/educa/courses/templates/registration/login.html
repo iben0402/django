@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Zaloguj się{% endblock %}
+
+{% block content %}
+  <h1>Zaloguj się</h1>
+  <div class="module">
+    {% if form.errors %}
+      <p>Nieprawidłowa nazwa użytkownika lub hasło. Spróbuj ponownie.</p>
+    {% else %}
+      <p>Aby się zalogować skorzystaj z poniższego formularza:</p>
+    {% endif %}
+    <div class="login-form">
+      <form action="{% url 'login' %}" method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}" />
+        <p><input type="submit" value="Zaloguj się"></p>
+      </form>
+    </div>
+  </div>
+{% endblock %}

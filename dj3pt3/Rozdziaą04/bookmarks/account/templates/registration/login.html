@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Zaloguj się{% endblock %}
+
+{% block content %}
+  <h1>Zaloguj się</h1>
+  {% if form.errors %}
+    <p>
+     Nazwa użytkownika lub hasło nieprawidłowe.
+     Spróbuj ponownie.
+    </p>
+  {% else %}
+    <p>Użyj poniższego formularza, aby się zalogować.Jeśli nie masz konta <a href="{% url "register" %}">zarejestruj się tutaj</a></p>
+  {% endif %}
+  <div class="login-form">
+    <form action="{% url 'login' %}" method="post">
+      {{ form.as_p }}
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next }}" />
+      <p><input type="submit" value="Zaloguj się"></p>
+    </form>
+    <p><a href="{% url "password_reset" %}">Zapomniałeś hasła?</a></p>
+  </div>
+  <div class="social">
+    <ul>
+      <li class="facebook">
+        <a href="{% url "social:begin" "facebook" %}">Zaloguj się przez Facebooka</a>
+      </li>
+      <li class="twitter">
+        <a href="{% url "social:begin" "twitter" %}">Zaloguj się przez Twittera</a>
+      </li>
+      <li class="google">
+        <a href="{% url "social:begin" "google-oauth2" %}">Zaloguj się przez Google</a>
+      </li>
+    </ul>
+  </div>
+{% endblock %}
